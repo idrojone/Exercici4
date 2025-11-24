@@ -23,6 +23,13 @@ async function getCategoryByName(req, res) {
             joke.content = await translate.translate(joke.content, lang);
         }
     }
+    // if (lang && lang !== 'en') {
+    //     const jokeTexts = jokes.map(joke => joke.content);
+    //     const translatedTexts = await translate.translateMany(jokeTexts, lang);
+    //     jokes.forEach((joke, index) => {
+    //         joke.content = translatedTexts[index];
+    //     });
+    // }
     res.json({ category, jokes });
 }
 
