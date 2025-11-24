@@ -12,13 +12,15 @@ export default function Layout({ children }) {
 
   return (
     <div>
-      <header style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 16px', borderBottom: '1px solid #eee' }}>
-        <h3>Chistes App</h3>
+      <header className="flex justify-between items-center px-4 py-2 border-b border-gray-200">
+        <h3 className="text-lg font-semibold">Chistes App</h3>
         <div>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            Logout
+          </button>
         </div>
       </header>
-      <main style={{ padding: '16px' }}>{children}</main>
+      <main className="p-4">{children}</main>
     </div>
   )
 }

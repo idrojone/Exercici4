@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/node,react,python,venv
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,react,python,venv
 
+db/sessions
+
 ### Node ###
 # Logs
 logs

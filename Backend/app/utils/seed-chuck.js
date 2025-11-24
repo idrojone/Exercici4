@@ -31,8 +31,8 @@ async function seed() {
         continue;
       }
 
-      // Insertar 30 chistes por categoría, sólo si no existen
-      for (let i = 0; i < 30; i++) {
+      // Insertar 4 chistes por categoría, sólo si no existen
+      for (let i = 0; i < 4; i++) {
         const joke = await axios.get(`https://api.chucknorris.io/jokes/random?category=${name}`).then(r => r.data);
 
         const existingJoke = selectJoke.get(joke.id, joke.value);
@@ -49,9 +49,17 @@ async function seed() {
     console.log('Seeding finished.');
   } catch (err) {
     console.error('Error during seeding:', err);
-  } finally {
-    db.close();
-  }
+  } 
 }
 
-seed();
+(async function runEveryMinute() {
+  while (true) {
+    try {
+      await seed();
+    } catch (err) {
+      console.error('Error ejecutando seed:', err);
+    }
+    // Espera 60 segundos
+    await new Promise(resolve => setTimeout(resolve, 60 * 1000));
+  }
+})();

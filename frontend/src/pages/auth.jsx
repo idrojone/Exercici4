@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthProvider.jsx'
+import { AuthForm } from '../components/AuthForm.jsx'
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true)
@@ -30,30 +31,17 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="auth-page">
-      <h2>{isLogin ? 'Login' : 'Register'}</h2>
-      <div>
-        <button onClick={() => setIsLogin(true)} disabled={isLogin}>Login</button>
-        <button onClick={() => setIsLogin(false)} disabled={!isLogin}>Register</button>
-      </div>
-      <form onSubmit={handleSubmit}>
-        {!isLogin && (
-          <div>
-            <label>Nombre</label>
-            <input value={name} onChange={e => setName(e.target.value)} />
-          </div>
-        )}
-        <div>
-          <label>Email</label>
-          <input value={email} onChange={e => setEmail(e.target.value)} type="email" />
-        </div>
-        <div>
-          <label>Password</label>
-          <input value={password} onChange={e => setPassword(e.target.value)} type="password" />
-        </div>
-        <button type="submit">{isLogin ? 'Entrar' : 'Registrar'}</button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
+    <AuthForm
+      isLogin={isLogin}
+      onSubmit={handleSubmit}
+      error={error}
+      setIsLogin={setIsLogin}
+      name={name}
+      setName={setName}
+      email={email}
+      setEmail={setEmail}
+      password={password}
+      setPassword={setPassword}
+    />
   )
 }
