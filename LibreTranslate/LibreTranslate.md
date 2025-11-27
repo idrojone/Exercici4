@@ -3,7 +3,9 @@ Crear entorno virtual
 ```bash
 python -m venv .venv
 pip install libretranslate
-libretranslate --port 5001 --load-only en,es
+libretranslate --port 5001 --load-only en,es,ca
+#Si quieres mas lenguajes
+libretranslate --update-models
 ```
 
 

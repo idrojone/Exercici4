@@ -6,4 +6,6 @@ module.exports = (app) => {
     app.post('/auth/register', authController.register);
     app.post('/auth/logout', authMiddleware.authMiddleware, authController.logout);
     app.get('/auth/me', authMiddleware.authMiddleware, authController.getMe);
+    app.post('/auth/log', authMiddleware.authMiddleware, authController.log)
+
 }

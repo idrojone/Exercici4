@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getCategories } from '../services/categories.service';
 
-export default function useCategories() {
+
+export default function useCategories(lang) {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,8 +10,9 @@ export default function useCategories() {
   useEffect(() => {
     async function load() {
       try {
+        setCategories([]);
         setLoading(true);
-        const data = await getCategories();
+        const data = await getCategories(lang);
         setCategories(data);
       } catch (err) {
         setError(err);
@@ -19,7 +21,7 @@ export default function useCategories() {
       }
     }
     load();
-  }, []);
+  }, [lang]);
 
   return { categories, loading, error };
 }

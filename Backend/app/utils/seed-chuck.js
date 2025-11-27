@@ -49,7 +49,7 @@ async function seed() {
     console.log('Seeding finished.');
   } catch (err) {
     console.error('Error during seeding:', err);
-  } 
+  }
 }
 
 (async function runEveryMinute() {
@@ -59,7 +59,6 @@ async function seed() {
     } catch (err) {
       console.error('Error ejecutando seed:', err);
     }
-    // Espera 60 segundos
-    await new Promise(resolve => setTimeout(resolve, 60 * 1000));
+    await new Promise(resolve => setTimeout(resolve, 60 * 100000));
   }
 })();

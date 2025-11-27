@@ -5,8 +5,10 @@ const axios = require('axios');
 const LIBRE_TRANSLATE_URL = 'http://127.0.0.1:5001/translate';
 
 async function translate(text, target = 'en') {
+    console.log(text);
+    console.log(target);
     if (!text) return text;
-    if (target === 'en') return text; // no-op when target is English
+    if (target === 'en') return text;
 
     const payload = {
         q: text,
@@ -19,6 +21,7 @@ async function translate(text, target = 'en') {
         const res = await axios.post(LIBRE_TRANSLATE_URL, payload, {
             headers: { 'Content-Type': 'application/json' }
         });
+        console.log(res);
         return (res.data && res.data.translatedText) ?? '';
     } catch (err) {
         if (err.response) {

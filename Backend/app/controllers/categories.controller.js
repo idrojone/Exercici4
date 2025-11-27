@@ -8,7 +8,7 @@ function getCategories(_, res) {
     res.json(categories);
 }
 
-async function getCategoryByName(req, res) { 
+async function getCategoryByName(req, res) {
     const { name, lang } = req.params;
     const stmtCat = db.prepare('SELECT * FROM categories WHERE name = ?');
     const category = stmtCat.get(name);
@@ -18,7 +18,7 @@ async function getCategoryByName(req, res) {
     const stmtJokes = db.prepare('SELECT * FROM jokes WHERE categoryId = ?');
     console.log(category.id);
     const jokes = stmtJokes.all(category.id);
-    if (lang === 'es') {
+    if (lang !== 'en') {
         for (let joke of jokes) {
             joke.content = await translate.translate(joke.content, lang);
         }

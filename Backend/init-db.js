@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS jokes (
 
 CREATE TABLE IF NOT EXISTS translated_jokes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  jokeId INTEGER,
+  jokeId TEXT,
   targetLang TEXT,
   translatedText TEXT,
   provider TEXT,
@@ -42,12 +42,10 @@ CREATE TABLE IF NOT EXISTS translated_jokes (
 CREATE TABLE IF NOT EXISTS user_joke_views (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   userId INTEGER,
-  jokeId INTEGER,
+  jokeId TEXT,
   langViewed TEXT,
   viewedAt TEXT DEFAULT CURRENT_TIMESTAMP,
-  durationSeconds INTEGER DEFAULT 0,
-  FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
-  FOREIGN KEY (jokeId) REFERENCES jokes(id) ON DELETE CASCADE
+  durationSeconds INTEGER DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS user_session (

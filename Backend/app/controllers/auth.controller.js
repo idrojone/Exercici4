@@ -11,7 +11,7 @@ async function login(req, res) {
     if (!row) return res.status(401).json({ message: 'Credenciales inválidas' });
     const passwordMatch = await bcrypt.compare(password, row.passwordHash);
     if (!passwordMatch) return res.status(401).json({ message: 'Credenciales inválidas' });
-    const token = jwt.createToken({ email: row.email, name: row.name });
+    const token = jwt.createToken(row.email, row.name, row.id);
     const session = await sessionController.createSession(row.id, token);
     if (!session) return res.status(500).json({ message: 'Error al crear la sesión del usuario' });
     return res.status(200).json({ accessToken: token, user: { email: row.email, name: row.name } });
@@ -56,9 +56,30 @@ async function getMe(req, res) {
     return res.status(200).json({ email, name });
 }
 
+async function log(req, res) {
+    const { jokes, lang } = req.body
+    const userId = req.userId;
+
+    try {
+        jokes.forEach(id => {
+            let stmt = db.prepare('INSERT INTO user_joke_views (userId, jokeId, langViewed) VALUES (?, ?, ?)');
+            stmt.run(userId, id.id, lang);
+        });
+
+        return res.status(200).json('ok');
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Error al guardar el log' });
+    }
+
+    return res.status(200).json({ jokes, lang, userId })
+
+
+}
 module.exports = {
     login,
     register,
     logout,
-    getMe
+    getMe,
+    log
 };

@@ -22,7 +22,8 @@ require('./routes/auth.routes')(app);
 require('./routes/categories.routes')(app);
 
 //Seed
-require('./utils/seed-chuck')
+// require('./utils/seed-chuck')
+
 
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
