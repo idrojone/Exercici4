@@ -4,21 +4,13 @@ Crear entorno virtual
 python -m venv .venv
 pip install libretranslate
 libretranslate --port 5001 --load-only en,es,ca
-#Si quieres mas lenguajes
-libretranslate --update-models
-```
-
-
-
-Instalamos dependencias
-
-```bash
-pip install -r requirements.txt
+# Si falla al traducir es porque no se han actulizado los modelos de traducción, para ver las traducciones disponibles ir ha http://127.0.0.1:5001/languages
+libretranslate --port 5001 --update-models --load-only en,es,ca
 ```
 
 
 ----
 Try docker 
 ```bash
-docker run --rm -p 5000:5000 libretranslate/libretranslate --load-only en,es
+docker run --rm -p 5001:5001 libretranslate/libretranslate --load-only en,es,ca
 ```

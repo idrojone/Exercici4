@@ -18,5 +18,6 @@ export async function login({ email, password }) {
 export async function logout() {
     await api.post('/auth/logout');
     localStorage.removeItem('token');
+    localStorage.removeItem('selectedLang');
     setAuthToken(null);
 }
